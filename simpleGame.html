@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Game</title>
+</head>
+<body>
+  <canvas id="gameCanvas" width="600" height="600"></canvas>
+  <button id="leftButton">Move Left</button>
+  <button id="rightButton">Move Right</button>
+  <script>
+    // Get the canvas element
+    var canvas = document.getElementById('gameCanvas');
+    // Get the canvas context, which we will use to draw on the canvas
+    var context = canvas.getContext('2d');
+
+    // Set some initial variables
+    var x = 50;
+    var y = 50;
+    var dx = 2;
+    var dy = 4;
+    var playerWidth = 50;
+    var playerHeight = 10;
+
+    // This function is called repeatedly to update the game state and draw the game
+    function updateGame() {
+      // Update the y position based on the dy value
+      y += dy;
+
+      // Check if the ball has hit the edge of the canvas
+      if (y < 0 || y > canvas.height) {
+        dy = -dy;
+      }
+
+      // Clear the canvas
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the ball
+      context.beginPath();
+      context.arc(x, y, 10, 0, Math.PI * 2, true);
+      context.fillStyle = 'green';
+      context.fill();
+      context.closePath();
+
+      // Draw the player
+      context.fillStyle = 'blue';
+      context.fillRect(x - playerWidth / 2, canvas.height - playerHeight, playerWidth, playerHeight);
+    }
+
+    // Set the game to update at 60 frames per second
+    setInterval(updateGame, 1000/60);
+
+    // Add event listeners for the buttons
+    document.getElementById('leftButton').addEventListener('click', function() {
+      x -= 5;
+    });
+    document.getElementById('rightButton').addEventListener('click', function() {
+      x += 5;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live HTML/CSS Editor</title>
+    <style>
+      /* Add some basic styling for the editor */
+      #html-editor {
+        border: 1px solid #ccc;
+        min-height: 300px;
+        padding: 10px;
+      }
+      #css-editor {
+        border: 1px solid #ccc;
+        min-height: 300px;
+        padding: 10px;
+      }
+      #output {
+        border: 1px solid #ccc;
+        min-height: 300px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Create the HTML editor -->
+    <div id="html-editor" contenteditable="true" style="display: pre;">
+      <!-- Add some initial content for the HTML editor -->
+      <h1>Live HTML/CSS Editor</h1>
+      <p>Enter your HTML code in the left editor and your CSS code in the right editor. The output will be displayed in the bottom panel.</p>
+    </div>
+
+    <!-- Create the CSS editor -->
+    <div id="css-editor" contenteditable="true">
+      <!-- Add some initial content for the CSS editor -->
+      h1 {
+        color: red;
+      }
+      p {
+        font-size: 16px;
+      }
+    </div>
+
+    <!-- Create the output panel -->
+    <div id="output"></div>
+
+    <!-- Add the JavaScript to update the output panel -->
+    <script>
+      // Get references to the HTML and CSS editors and the output panel
+      var htmlEditor = document.getElementById('html-editor');
+      var cssEditor = document.getElementById('css-editor');
+      var output = document.getElementById('output');
+
+      // Add event listeners to the HTML and CSS editors to update the output panel when the content changes
+      htmlEditor.addEventListener('input', updateOutput);
+      cssEditor.addEventListener('input', updateOutput);
+
+      // The updateOutput function gets the content from the HTML and CSS editors and updates the output panel
+      function updateOutput() {
+        // Get the content from the editors
+        var html = htmlEditor.innerHTML;
+        var css = cssEditor.innerHTML;
+
+        // Update the output panel with the combined HTML and CSS
+        output.innerHTML = '<style>' + css + '</style>' + html;
+      }
+    </script>
+  </body>
+</html>
